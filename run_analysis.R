@@ -3,32 +3,32 @@
 # UCI HAR Dataset
 
 # set directory load libraries
-setwd("/Users/ktarkhan/RStat/CourseraR/DataCleanup")
-library(tidyverse)
+setwd("/Users/ktarkhan/RStat/CourseraR/DataCleanup/Dataset")
+library(dplyr)
 
 # load files and prepare the data 
 # the names of the features measured
 features <-
-  read.table("./Dataset/features.txt", col.names=c("col_num", "feature"), 
+  read.table("./features.txt", col.names=c("col_num", "feature"), 
              colClasses=c("integer", "character"))
 feature_names <- gsub("[-(),]+",'_', features$feature)
 
 #the types of activities performed
 activities <- 
-  read.table("./Dataset/activity_labels.txt", col.names=c("code", "activity"), 
+  read.table("./activity_labels.txt", col.names=c("code", "activity"), 
              colClasses=c("integer", "character"))
 code_activity <- activities$activity
 names(code_activity) <- activities$code
 
 #test data
-x_test <- read.table("./Dataset/test/X_test.txt", colClasses = "numeric")  
-act_test <- read.table("./Dataset/test/y_test.txt", colClasses = "factor")
-subj_test <- read.table("./Dataset/test/subject_test.txt",  colClasses="numeric")
+x_test <- read.table("./test/X_test.txt", colClasses = "numeric")  
+act_test <- read.table("./test/y_test.txt", colClasses = "factor")
+subj_test <- read.table("./test/subject_test.txt",  colClasses="numeric")
 
 #train data
-x_train <- read.table("./Dataset/train/X_train.txt", colClasses = "numeric")  
-act_train <- read.table("./Dataset/train/y_train.txt", colClasses = "factor")
-subj_train <- read.table("./Dataset/train/subject_train.txt",  colClasses="numeric")
+x_train <- read.table("./train/X_train.txt", colClasses = "numeric")  
+act_train <- read.table("./train/y_train.txt", colClasses = "factor")
+subj_train <- read.table("./train/subject_train.txt",  colClasses="numeric")
 
 # 1. Merge the training and the test sets to create one data set.
 x_data <- rbind(x_test, x_train)
